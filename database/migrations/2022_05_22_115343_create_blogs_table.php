@@ -21,10 +21,14 @@ return new class extends Migration
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('author_id')->constrained('users')->onDelete('cascade');
-            $table->string('title');
+            $table->string('title')->unique();
+            $table->string('slug')->unique();
             $table->text('headline');
-            $table->enum('category', ['recipe', 'post']);
+            $table->enum('category', ['resep', 'artikel']);
+            $table->text('content');
             $table->foreignId('product_id')->nullable()->constrained('products')->onDelete('cascade');
+            $table->string('image')->after('product_id');
+            $table->integer('views')->default(0);
             $table->timestamps();
         });
     }

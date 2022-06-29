@@ -32,8 +32,8 @@
                                 <label for="category">Kategori</label>
                                 <select class="form-control form-control-sm" id="category" name="category">
                                     <option value="" disabled>Pilih Kategori</option>
-                                    <option @selected((old('category') ?? $blog->category) == 'recipe') value="recipe">RESEP</option>
-                                    <option @selected((old('category') ?? $blog->category) != 'recipe') value="post">INFORMASI</option>
+                                    <option @selected((old('category') ?? $blog->category) == 'resep') value="resep">RESEP</option>
+                                    <option @selected((old('category') ?? $blog->category) != 'resep') value="artikel">INFORMASI</option>
                                 </select>
                             </div>
                             @error('category')
@@ -59,8 +59,7 @@
                     </div>
                     <div class="form-group">
                         <label for="headline">Pokok Berita</label>
-                        <textarea class="form-control form-control-sm" id="headline" name="headline"
-                            rows="3">{{ old('headline') ?? $blog->headline }}</textarea>
+                        <textarea class="form-control form-control-sm" id="headline" name="headline" rows="3">{{ old('headline') ?? $blog->headline }}</textarea>
                         @error('headline')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -92,7 +91,6 @@
     <script>
         tinymce.init({
             selector: 'textarea#content',
-            plugins: 'a11ychecker advcode casechange export formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
             toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
             toolbar_mode: 'floating',
             tinycomments_mode: 'embedded',

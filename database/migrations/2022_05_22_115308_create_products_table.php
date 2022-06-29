@@ -24,7 +24,10 @@ return new class extends Migration
             $table->integer('weight');
             $table->integer('pcs');
             $table->integer('price');
+            $table->integer('stock')->default(0);
             $table->text('description');
+            $table->string('image');
+            $table->integer('views')->default(0);
             $table->timestamps();
         });
     }

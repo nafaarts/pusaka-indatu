@@ -44,7 +44,7 @@ class BlogController extends Controller
             'title' => 'required',
             'headline' => 'required',
             'content' => 'required',
-            'product_id' => Rule::requiredIf($request->category == 'recipe'),
+            'product_id' => Rule::requiredIf($request->category == 'resep'),
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
         ]);
 
@@ -55,6 +55,7 @@ class BlogController extends Controller
 
         Blog::create([
             'title' => $request->title,
+            'slug' => str()->slug($request->title),
             'headline' => $request->headline,
             'content' => $request->content,
             'category' => $request->category,
@@ -91,7 +92,7 @@ class BlogController extends Controller
             'title' => 'required',
             'headline' => 'required',
             'content' => 'required',
-            'product_id' => Rule::requiredIf($request->category == 'recipe'),
+            'product_id' => Rule::requiredIf($request->category == 'resep'),
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10048',
         ]);
 
@@ -103,6 +104,7 @@ class BlogController extends Controller
 
         $blog->update([
             'title' => $request->title,
+            'slug' => str()->slug($request->title),
             'headline' => $request->headline,
             'content' => $request->content,
             'category' => $request->category,
