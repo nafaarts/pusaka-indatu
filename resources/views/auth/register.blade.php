@@ -11,14 +11,14 @@
                         <div class="brand-logo d-flex justify-content-center">
                             <img src="{{ asset('admin/images/logo.svg') }}" alt="logo">
                         </div>
-                        <h4>New here?</h4>
-                        <h6 class="font-weight-light mt-3">Signing up is easy. It only takes a few steps</h6>
+                        <h4>Register</h4>
+                        {{-- <h6 class="font-weight-light mt-3">Signing up is easy. It only takes a few steps</h6> --}}
                         <form method="POST" action="{{ route('register') }}" class="mt-4">
                             @csrf
                             <div class="form-group">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                    name="name" value="{{ old('name') }}" required autocomplete="name" autofocus
-                                    placeholder="Name">
+                                <input id="name" type="text"
+                                    class="form-control @error('name') is-invalid @enderror" name="name"
+                                    value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -27,9 +27,9 @@
                             </div>
 
                             <div class="form-group">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{ old('email') }}" required autocomplete="email"
-                                    placeholder="Email">
+                                <input id="email" type="email"
+                                    class="form-control @error('email') is-invalid @enderror" name="email"
+                                    value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -54,11 +54,11 @@
                             </div>
 
                             <div class="my-3">
-                                <button type="submit" class="btn btn-block btn-warning">SIGN UP</button>
+                                <button type="submit" class="btn btn-block btn-warning">Daftar</button>
                             </div>
 
                             <small class="text-center mt-4 font-weight-light">
-                                Already have an account? <a href="{{ route('login') }}" class="text-warning">Login</a>
+                                Sudah punya akun? <a href="{{ route('login') }}" class="text-warning">Login</a>
                             </small>
                         </form>
                     </div>

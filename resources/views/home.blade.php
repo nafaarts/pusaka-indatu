@@ -8,12 +8,36 @@
             <ul class="splide__list">
                 <li class="splide__slide">
                     <img class="img-fluid" src="{{ asset('images/1.jpg') }}" alt="Sample Image">
+                    <div class="hero-content">
+                        <div>
+                            <h2><strong>Selamat Datang di Pusaka Indatu</strong></h2>
+                            <p>Sajian kuliner khas</p>
+                            <a href="/kuliner" class="btn btn-sm btn-outline-light border-2">Explore Kuliner <i
+                                    class="mdi mdi-arrow-right"></i></a>
+                        </div>
+                    </div>
                 </li>
                 <li class="splide__slide">
                     <img class="img-fluid" src="{{ asset('images/2.jpg') }}" alt="Sample Image">
+                    <div class="hero-content">
+                        <div>
+                            <h2><strong>Pusaka Indatu</strong></h2>
+                            <p>Bumbu Aceh siap dimasak</p>
+                            <a href="/produk" class="btn btn-sm btn-outline-light border-2">Explore produk <i
+                                    class="mdi mdi-arrow-right"></i></a>
+                        </div>
+                    </div>
                 </li>
                 <li class="splide__slide">
                     <img class="img-fluid" src="{{ asset('images/3.jpg') }}" alt="Sample Image">
+                    <div class="hero-content">
+                        <div>
+                            <h2><strong>Pusaka Indatu</strong></h2>
+                            <p>Bumbu Aceh siap dimasak</p>
+                            <a href="/kuliner" class="btn btn-sm btn-outline-light border-2">Explore Kuliner <i
+                                    class="mdi mdi-arrow-right"></i></a>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -22,8 +46,9 @@
     <section class="mt-5">
         <div class="d-flex justify-content-between align-items-center">
             <h4 class="text-muted">Produk Pusaka Indatu</h4>
-            @if ($products->count() > 2)
-                <a class="text-dark"><i class="mdi mdi-arrow-right"></i> Tampilkan seluruh produk</a>
+            @if ($products->count() > 4)
+                <a href="{{ route('produk') }}" class="text-dark"><i class="mdi mdi-arrow-right"></i> Tampilkan seluruh
+                    produk</a>
             @endif
         </div>
         <div id="produk" class="splide" aria-label="Produk Terbaru">
@@ -32,11 +57,11 @@
                     @foreach ($products as $product)
                         <li class="splide__slide bg-white" style="width: 100%">
                             <div class="shadow-sm p-2 rounded">
-                                <div class="d-flex justify-content-center align-items-center"
-                                    style="overflow: hidden; height: 170px;">
+                                <a class="d-flex justify-content-center align-items-center" style="overflow: hidden;"
+                                    href="{{ route('produk.detail', $product) }}">
                                     <img src="{{ asset('storage/products/' . $product->image) }}"
                                         class="img-fluid rounded" alt="Product Image">
-                                </div>
+                                </a>
                                 <div class="text-center py-3">
                                     <p class="m-0">{{ $product->name }}</p>
                                     <small class="text-muted">Rp {{ number_format($product->price) }}</small>
@@ -58,8 +83,9 @@
     <section class="mt-5">
         <div class="d-flex justify-content-between align-items-center">
             <h4 class="text-muted">Kuliner Aceh</h4>
-            @if ($kuliner->count() > 2)
-                <a class="text-dark"><i class="mdi mdi-arrow-right"></i> Tampilkan seluruh Kuliner</a>
+            @if ($kuliner->count() > 4)
+                <a href="{{ route('kuliner') }}" class="text-dark"><i class="mdi mdi-arrow-right"></i> Tampilkan seluruh
+                    Kuliner</a>
             @endif
         </div>
         <div id="kuliner" class="splide" aria-label="Kulier Terbaru">
@@ -67,12 +93,11 @@
                 <ul class="splide__list">
                     @foreach ($kuliner as $makanan)
                         <li class="splide__slide bg-white" style="width: 100%">
-                            <div class="shadow-sm p-2 rounded">
-                                <div class="d-flex justify-content-center align-items-center"
-                                    style="overflow: hidden; height: 170px;">
+                            <div class="shadow-sm p-2 rounded text-dark">
+                                <a class="d-flex justify-content-center align-items-center" style="overflow: hidden;">
                                     <img src="{{ asset('storage/foods/' . $makanan->image) }}" class="img-fluid rounded"
                                         alt="Makanan Image">
-                                </div>
+                                </a>
                                 <div class="text-center py-3">
                                     <p class="m-0">{{ $makanan->name }}</p>
                                     <small class="text-muted">Rp {{ number_format($makanan->price) }}</small>
@@ -94,6 +119,21 @@
 
 @push('styles')
     <style>
+        .hero-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            text-align: left;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            color: #fff;
+            padding-left: 50px;
+            align-items: center;
+            background: rgb(2, 0, 36);
+            background: linear-gradient(207deg, transparent 0%, rgba(2, 0, 36, 0) 30%, #ffc107 100%);
+        }
+
         #hero .splide__track {
             border-radius: 10px;
             overflow: hidden;
@@ -128,6 +168,7 @@
         #hero .splide__slide {
             height: 350px;
             width: 100%;
+            position: relative;
             background-color: aliceblue;
         }
 

@@ -29,6 +29,11 @@ Route::get('/produk', function () {
     return view('produk', compact('products'));
 })->name('produk');
 
+Route::get('/produk/{produk:slug}', function (Product $produk) {
+    $products = Product::latest()->where('id', '!=', $produk->id)->get();
+    return view('produk-detail', compact('produk', 'products'));
+})->name('produk.detail');
+
 Route::get('/kuliner', function () {
     $kuliner = Food::latest()->get();
     return view('kuliner', compact('kuliner'));
@@ -40,14 +45,19 @@ Route::get('/artikel', function () {
 })->name('artikel');
 
 Route::get('/artikel/{blog:slug}', function (Blog $blog) {
-    return view('artikel-baca', compact('blog'));
+    $other_blogs = Blog::where('id', '!=', $blog->id)->latest()->limit(3)->get();
+    return view('artikel-baca', compact('blog', 'other_blogs'));
 })->name('artikel.baca');
+
+Route::get('/profil', function () {
+    return view('profil');
+})->name('profil');
 
 Auth::routes([
     'verify' => true,
 ]);
 
-Route::group(['middleware' => ['auth', 'verified']], function () {
+Route::group(['middleware' => ['auth', 'verified', 'can:is_admin']], function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard.index');
     })->name('dashboard');

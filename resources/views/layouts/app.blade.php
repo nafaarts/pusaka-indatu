@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     @stack('styles')
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
 </head>
 
 <body>
@@ -67,9 +68,12 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link btn btn-sm btn-warning py-1 px-3" href="{{ route('login') }}">
-                                        <i class="mdi mdi-login"></i>
-                                        {{ __('Login') }}
+                                    <a class="nav-link text-white btn btn-sm btn-warning py-1 px-3"
+                                        href="{{ route('login') }}">
+                                        <b>
+                                            <i class="mdi mdi-login"></i>
+                                            {{ __('Login') }}
+                                        </b>
                                     </a>
                                 </li>
                             @endif
@@ -83,12 +87,24 @@
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    {{ explode(' ', Auth::user()->name)[0] }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    @can('is_admin')
+                                        <a class="dropdown-item" href="{{ route('dashboard') }}">
+                                            <i class="mdi mdi-view-dashboard-outline"></i>
+                                            {{ __('Dashboard') }}
+                                        </a>
+                                    @elsecan('is_user')
+                                        <a class="dropdown-item" href="{{ route('profil') }}">
+                                            <i class="mdi mdi-account"></i>
+                                            Profil
+                                        </a>
+                                    @endcan
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                        <i class="mdi mdi-logout"></i>
                                         {{ __('Logout') }}
                                     </a>
 

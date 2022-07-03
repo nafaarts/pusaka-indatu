@@ -51,6 +51,7 @@ class FoodController extends Controller
 
         Food::create([
             'name' => $request->name,
+            'slug' => str()->slug($request->name),
             'price' => $request->price,
             'description' => $request->description,
             'image' => $image,
@@ -94,6 +95,7 @@ class FoodController extends Controller
 
         $food->update([
             'name' => $request->name,
+            'slug' => str()->slug($request->name),
             'price' => $request->price,
             'description' => $request->description,
             'image' => $image ?? $food->image,

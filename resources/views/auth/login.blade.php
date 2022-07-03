@@ -11,13 +11,14 @@
                         <div class="brand-logo d-flex justify-content-center">
                             <img src="{{ asset('admin/images/logo.svg') }}" alt="logo">
                         </div>
-                        <h4>Hello! let's get started</h4>
-                        <h6 class="font-weight-light mt-3">Sign in to continue.</h6>
+                        <h4>Login</h4>
+                        {{-- <h6 class="font-weight-light mt-3">login untuk memulai.</h6> --}}
                         <form method="POST" action="{{ route('login') }}" class="mt-4">
                             @csrf
                             <div class="form-group">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{ old('email') }}" required autocomplete="email" autofocus
+                                <input id="email" type="email"
+                                    class="form-control @error('email') is-invalid @enderror" name="email"
+                                    value="{{ old('email') }}" required autocomplete="email" autofocus
                                     placeholder="Email">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -43,18 +44,18 @@
                                     <label class="form-check-label text-muted">
                                         <input class="form-check-input" type="checkbox" name="remember" id="remember"
                                             {{ old('remember') ? 'checked' : '' }}>
-                                        Keep me signed in
+                                        Ingat saya
                                     </label>
 
                                 </div>
                                 @if (Route::has('password.request'))
                                     <a class="auth-link text-black" href="{{ route('password.request') }}">
-                                        Forgot password?
+                                        Lupa Password?
                                     </a>
                                 @endif
                             </div>
                             <small class="text-center mt-4 font-weight-light">
-                                Don't have an account? <a href="{{ route('register') }}" class="text-warning">Create</a>
+                                Belum punya akun? <a href="{{ route('register') }}" class="text-warning">Daftar</a>
                             </small>
                         </form>
                     </div>

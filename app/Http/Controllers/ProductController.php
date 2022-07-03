@@ -54,6 +54,7 @@ class ProductController extends Controller
 
         Product::create([
             'name' => $request->name,
+            'slug' => str()->slug($request->name),
             'weight' => $request->weight,
             'pcs' => $request->pcs,
             'price' => $request->price,
@@ -103,6 +104,7 @@ class ProductController extends Controller
 
         $product->update([
             'name' => $request->name,
+            'slug' => str()->slug($request->name),
             'weight' => $request->weight,
             'pcs' => $request->pcs,
             'price' => $request->price,

@@ -49,7 +49,20 @@
             </div>
             <div class="card mb-4">
                 <div class="card-header bg-white">Artikel Terbaru</div>
-                <div class="card-body">Nanti 3 artikel terbaru tampil disini kecuali yang sedang tampil</div>
+                <div class="card-body">
+                    @foreach ($other_blogs as $item)
+                        <a href="{{ route('artikel.baca', $item) }}" class="media d-flex text-dark"
+                            style="gap: 10px; cursor: pointer">
+                            <div class="card overflow-hidden"
+                                style="width: 300px; background-image: url({{ asset('storage/blogs/' . $item->image) }});background-size: cover; background-position: center center;">
+                            </div>
+                            <div class="media-body">
+                                <h6 class="mt-0 mb-1"><strong>{{ $item->title }}</strong></h6>
+                                <small>{{ $item->headline }}</small>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
