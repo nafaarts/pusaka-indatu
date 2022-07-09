@@ -22,6 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'phone',
         'is_admin',
     ];
 
@@ -50,5 +51,40 @@ class User extends Authenticatable implements MustVerifyEmail
             return $query->where('name', 'like', '%' . request('cari') . '%')
                 ->orWhere('email', 'like', '%' . request('cari') . '%');
         }
+    }
+
+    public function alamat()
+    {
+        return $this->hasMany(UserAddress::class);
+    }
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function getCartTotal()
+    {
+        $total = 0;
+        foreach ($this->cart as $cart) {
+            $total += $cart->getHarga();
+        }
+
+        return $total;
+    }
+
+    public function getCartWeight()
+    {
+        $total = 0;
+        foreach ($this->cart as $cart) {
+            $total += $cart->getBerat();
+        }
+
+        return $total;
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

@@ -15,6 +15,7 @@ class Food extends Model
         'name',
         'slug',
         'price',
+        'satuan',
         'description',
         'image',
         'views'

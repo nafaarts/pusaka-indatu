@@ -13,8 +13,10 @@
                     <a class="badge bg-secondary text-decoration-none link-light text-uppercase"
                         href="#!">{{ $blog->category }}</a>
                 </header>
-                <figure class="mb-4"><img class="img-fluid rounded" src="{{ asset('storage/blogs/' . $blog->image) }}"
-                        alt="..." /></figure>
+                <figure class="mb-4 bg-warning">
+                    <img class="img-fluid w-100 rounded" src="{{ asset('storage/blogs/' . $blog->image) }}"
+                        alt="..." />
+                </figure>
                 <section class="mb-5">
                     {!! $blog->content !!}
                     @if ($blog->product())
@@ -38,27 +40,18 @@
         </div>
         <div class="col-lg-4">
             <div class="card mb-4">
-                <div class="card-header bg-white">Cari Artikel</div>
-                <div class="card-body">
-                    <div class="input-group">
-                        <input class="form-control" type="text" placeholder="Cari artikel..."
-                            aria-label="Cari artikel..." aria-describedby="button-search" />
-                        <button class="btn btn-warning text-white" id="button-search" type="button">Cari</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-4">
                 <div class="card-header bg-white">Artikel Terbaru</div>
                 <div class="card-body">
                     @foreach ($other_blogs as $item)
-                        <a href="{{ route('artikel.baca', $item) }}" class="media d-flex text-dark"
-                            style="gap: 10px; cursor: pointer">
-                            <div class="card overflow-hidden"
-                                style="width: 300px; background-image: url({{ asset('storage/blogs/' . $item->image) }});background-size: cover; background-position: center center;">
-                            </div>
-                            <div class="media-body">
-                                <h6 class="mt-0 mb-1"><strong>{{ $item->title }}</strong></h6>
-                                <small>{{ $item->headline }}</small>
+                        <a href="{{ route('artikel.baca', $item) }}">
+                            <div class="text-dark mb-2 row p-2" style="cursor: pointer;">
+                                <div class="col-4"
+                                    style="width: 70px; height: 70px; background-image: url({{ asset('storage/blogs/' . $item->image) }});background-size: cover; background-position: center center;">
+                                </div>
+                                <div class="col-8">
+                                    <h6 class="mt-0 mb-1"><strong>{{ $item->title }}</strong></h6>
+                                    <small>{{ $item->headline }}</small>
+                                </div>
                             </div>
                         </a>
                     @endforeach

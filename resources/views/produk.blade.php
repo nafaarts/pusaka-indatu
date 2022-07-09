@@ -21,11 +21,11 @@
                             <small class="text-muted">Rp {{ number_format($product->price) }}</small>
                         </div>
                         <div class="text-center">
-                            <div class="btn btn-sm btn-outline-warning mb-2 w-100"><i class="mdi mdi-cart-outline"></i>
+                            <a href="{{ route('add-to-cart', $product) }}"
+                                class="btn btn-sm btn-outline-warning mb-2 w-100"><i class="mdi mdi-cart-outline"></i>
                                 Tambah
                                 Keranjang
-                            </div>
-                            <div class="btn btn-sm btn-warning text-white w-100">Beli Sekarang</div>
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('order_details', function (Blueprint $table) {
-            $table->enum('status', ['waiting', 'processing', 'sending', 'done', 'cancelled'])->default('waiting')->after('payment_id');
+        Schema::table('orders', function (Blueprint $table) {
+            $table->foreignId('transaction_id')->constrained('transactions')->onDelete('cascade');
         });
     }
 
@@ -25,8 +25,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('order_details', function (Blueprint $table) {
-            $table->dropColumn('status');
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropForeign(['transaction_id']);
+            $table->dropColumn('transaction_id');
         });
     }
 };

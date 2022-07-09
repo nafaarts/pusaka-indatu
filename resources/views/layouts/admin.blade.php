@@ -88,9 +88,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/" class="nav-link text-dark">
+                            <a href="{{ route('orders.index') }}" class="nav-link text-dark">
                                 <i class="mdi mdi-credit-card-multiple menu-icon"></i>
-                                <span class="menu-title">Detail Pesanan</span>
+                                <span class="menu-title">Data Order</span>
                             </a>
                         </li>
                         <li class="nav-item">

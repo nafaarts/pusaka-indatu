@@ -46,7 +46,7 @@
     <section class="mt-5">
         <div class="d-flex justify-content-between align-items-center">
             <h4 class="text-muted">Produk Pusaka Indatu</h4>
-            @if ($products->count() > 4)
+            @if ($products->count() > 5)
                 <a href="{{ route('produk') }}" class="text-dark"><i class="mdi mdi-arrow-right"></i> Tampilkan seluruh
                     produk</a>
             @endif
@@ -67,9 +67,10 @@
                                     <small class="text-muted">Rp {{ number_format($product->price) }}</small>
                                 </div>
                                 <div class="text-center mb-2">
-                                    <div class="btn btn-sm mb-2 w-100"><i class="mdi mdi-cart-outline"></i> Tambah Keranjang
-                                    </div>
-                                    <div class="btn btn-sm btn-warning text-white w-100">Beli Sekarang</div>
+                                    <a href="{{ route('add-to-cart', $product) }}"
+                                        class="btn btn-sm btn-outline-warning mb-2 w-100"><i
+                                            class="mdi mdi-cart-outline"></i> Tambah Keranjang
+                                    </a>
                                 </div>
                             </div>
                         </li>
@@ -83,7 +84,7 @@
     <section class="mt-5">
         <div class="d-flex justify-content-between align-items-center">
             <h4 class="text-muted">Kuliner Aceh</h4>
-            @if ($kuliner->count() > 4)
+            @if ($kuliner->count() > 5)
                 <a href="{{ route('kuliner') }}" class="text-dark"><i class="mdi mdi-arrow-right"></i> Tampilkan seluruh
                     Kuliner</a>
             @endif
@@ -195,7 +196,7 @@
         var produk = new Splide('#produk', {
             type: 'slide',
             arrows: false,
-            perPage: 4,
+            perPage: 5,
             breakpoints: {
                 1024: {
                     perPage: 3,
@@ -222,7 +223,7 @@
             drag: 'free',
             arrows: false,
 
-            perPage: 4,
+            perPage: 5,
             breakpoints: {
                 1024: {
                     perPage: 3,

@@ -78,12 +78,14 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item">
-                                <a class="nav-link">
-                                    <i class="mdi mdi-cart-outline"></i>
-                                    <span class="badge bg-warning">2</span>
-                                </a>
-                            </li>
+                            @can('is_user')
+                                <li class="nav-item">
+                                    <a href="{{ route('cart') }}" class="nav-link">
+                                        <i class="mdi mdi-cart-outline"></i>
+                                        <span class="badge bg-warning">{{ auth()->user()->cart()->count() }}</span>
+                                    </a>
+                                </li>
+                            @endcan
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -175,7 +177,7 @@
                 </div>
             </section>
             <div class="text-center p-4 bg-light">
-                © 2021 Copyright |
+                © {{ date('Y') }} Copyright |
                 <a class="text-reset fw-bold" href="{{ route('home') }}">Pusaka Indatu</a>
             </div>
         </footer>

@@ -15,7 +15,7 @@
                     <h2>{{ $produk->name }}</h4>
                         <small class="text-muted mb-3 d-block"><i class="mdi mdi-tag"></i> 2039 x dibeli | <i
                                 class="mdi mdi-eye"></i>
-                            520 x dilihat</small>
+                            {{ $produk->views }} x dilihat</small>
                         <h5 class="mb-3"><b>Rp {{ number_format($produk->price) }}</b></h5>
                         <hr>
                         <h6 class="text-muted mb-3">Detail Produk</h6>
@@ -23,17 +23,17 @@
                             <tr>
                                 <td>Berat</td>
                                 <td class="px-2">:</td>
-                                <td>80 Gram</td>
+                                <td>{{ $produk->weight . ' ' . str()->plural('gram', $produk->weight) }}</td>
                             </tr>
                             <tr>
                                 <td>Isi</td>
                                 <td class="px-2">:</td>
-                                <td>80 Gram</td>
+                                <td>{{ $produk->pcs }}</td>
                             </tr>
                             <tr>
                                 <td>Stok</td>
                                 <td class="px-2">:</td>
-                                <td>80 Gram</td>
+                                <td>{{ $produk->stock }}</td>
                             </tr>
                         </table>
                         <p class="text-muted">{!! $produk->description !!}</p>
@@ -44,32 +44,37 @@
                 <div class="card p-3" style="width: 100%; position: sticky; top: 80px;" x-data="{ jumlah: 1, harga: '{{ $produk->price }}' }">
                     <small class="text-muted">Atur jumlah</small>
                     <hr>
-                    <div class="d-flex">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-outline-secondary" x-on:click="if(jumlah > 1) jumlah -= 1">-</button>
-                            </div>
-                            <input type="number" class="form-control text-center" id="jumlah" x-model="jumlah"
-                                name="jumlah">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" x-on:click="jumlah += 1">+</button>
+                    <form action="{{ route('checkout.store') }}" method="POST">
+                        @csrf
+                        <div class="d-flex">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <a class="btn btn-outline-secondary" x-on:click="if(jumlah > 1) jumlah -= 1">-</a>
+                                </div>
+                                <input type="number" class="form-control text-center" id="jumlah" x-model="jumlah"
+                                    name="jumlah">
+                                <div class="input-group-append">
+                                    <a class="btn btn-outline-secondary" x-on:click="jumlah += 1">+</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <h6 class="text-muted">Subtotal</h6>
-                        <h3><b>Rp <span x-text="harga * jumlah"></span></b></h3>
-                    </div>
-                    <div class="btn btn-sm btn-outline-warning mb-2 w-100  mt-3"><i class="mdi mdi-cart-outline"></i>
-                        Tambah
-                        Keranjang
-                    </div>
-                    <div class="btn btn-sm btn-warning text-white w-100">Beli Sekarang</div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="text-muted">Subtotal</h6>
+                            <h3><b>Rp <span x-text="new Intl.NumberFormat('en-US',).format(harga * jumlah)"></span></b></h3>
+                        </div>
+                        <a x-bind:href="'{{ route('add-to-cart', $produk) }}?qty=' + jumlah"
+                            class="btn btn-sm btn-outline-warning mb-2 w-100  mt-3"><i class="mdi mdi-cart-outline"></i>
+                            Tambah
+                            Keranjang
+                        </a>
+                        <input type="hidden" name="produk_id" value="{{ $produk->id }}">
+                        <button type="submit" class="btn btn-sm btn-warning text-white w-100">Beli Sekarang</button>
+                    </form>
                 </div>
             </aside>
         </div>
     </section>
-
+    <hr class="my-4">
     <section class="mt-5">
         <div class="d-flex justify-content-between align-items-center">
             <h4 class="text-muted">Produk Lainnya</h4>
@@ -94,9 +99,10 @@
                                     <small class="text-muted">Rp {{ number_format($product->price) }}</small>
                                 </div>
                                 <div class="text-center mb-2">
-                                    <div class="btn btn-sm mb-2 w-100"><i class="mdi mdi-cart-outline"></i> Tambah Keranjang
-                                    </div>
-                                    <div class="btn btn-sm btn-warning text-white w-100">Beli Sekarang</div>
+                                    <a href="{{ route('add-to-cart', $product) }}"
+                                        class="btn btn-sm btn-outline-warning mb-2 w-100"><i
+                                            class="mdi mdi-cart-outline"></i> Tambah Keranjang
+                                    </a>
                                 </div>
                             </div>
                         </li>
@@ -114,7 +120,7 @@
         var produk = new Splide('#produk', {
             type: 'slide',
             arrows: false,
-            perPage: 4,
+            perPage: 5,
             breakpoints: {
                 1024: {
                     perPage: 3,

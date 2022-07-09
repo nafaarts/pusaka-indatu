@@ -28,4 +28,9 @@ class Product extends Model
                 ->orWhere('description', 'like', '%' . request('cari') . '%');
         }
     }
+
+    public function detail()
+    {
+        return $this->weight . ' gram, ' . $this->pcs . ' pcs';
+    }
 }

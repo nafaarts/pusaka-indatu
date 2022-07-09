@@ -13,26 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        // USER ID
-        // ADDRESS LINE
-        // DISTRICT
-        // CITY
-        // CITY_ID
-        // PROVINCE
-        // POSTAL CODE
-        // COUNTRY
-        // PHONE
         Schema::create('user_addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('address_line');
-            $table->string('district');
-            $table->string('city');
-            $table->integer('city_id');
-            $table->string('province');
-            $table->string('postal_code');
-            $table->string('country');
-            $table->string('phone');
+            $table->string('alamat');
+            $table->string('kota');
+            $table->integer('kota_id');
+            $table->string('provinsi');
+            $table->string('provinsi_id');
+            $table->string('kode_pos');
             $table->timestamps();
         });
     }

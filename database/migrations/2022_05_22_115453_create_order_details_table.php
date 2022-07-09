@@ -13,16 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        // USER ID
-        // TOTAL
-        // PAYMENT ID
-        // ADDRESS ID
-        Schema::create('order_details', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->integer('total');
-            // $table->foreignId('payment_id')->constrained('payments')->onDelete('cascade');
+            $table->string('no_order')->unique();
             $table->foreignId('address_id')->constrained('user_addresses')->onDelete('cascade');
+            $table->string('kurir')->nullable();
+            $table->string('service')->nullable();
+            $table->string('etd')->nullable();
+            $table->string('harga_ongkir')->nullable();
+            $table->string('resi')->nullable();
+            $table->integer('total');
+            $table->enum('status', ['waiting', 'processing', 'sending', 'done', 'cancelled'])->default('waiting');
             $table->timestamps();
         });
     }
@@ -34,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_details');
+        Schema::dropIfExists('orders');
     }
 };

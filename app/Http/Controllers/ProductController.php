@@ -47,10 +47,7 @@ class ProductController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
         ]);
 
-        if ($request->hasFile('image')) {
-            $request->image->store('public/products');
-            $image = $request->image->hashName();
-        }
+        if ($request->hasFile('image')) $request->image->store('public/products');
 
         Product::create([
             'name' => $request->name,
@@ -60,7 +57,7 @@ class ProductController extends Controller
             'price' => $request->price,
             'stock' => $request->stock,
             'description' => $request->description,
-            'image' => $image,
+            'image' => $request->image->hashName(),
         ]);
 
         return redirect()->route('products.index')->with('success', 'Produk berhasil dibuat!');
@@ -99,7 +96,6 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
             File::delete('storage/products/' . $product->image);
             $request->image->store('public/products');
-            $image = $request->image->hashName();
         }
 
         $product->update([
@@ -110,7 +106,7 @@ class ProductController extends Controller
             'price' => $request->price,
             'stock' => $request->stock,
             'description' => $request->description,
-            'image' => $image ?? $product->image,
+            'image' => $request->image->hashName() ?? $product->image,
         ]);
 
         return redirect()->route('products.index')->with('success', 'Produk berhasil diubah!');
