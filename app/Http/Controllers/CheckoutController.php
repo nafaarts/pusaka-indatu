@@ -181,6 +181,9 @@ class CheckoutController extends Controller
     public function editAlamat(Request $request, Order $order)
     {
         $new_service = $request->service;
+        if ($new_service == null) {
+            return redirect()->back();
+        }
         $getOngkir = RajaOngkirController::getCost(358, $request->alamat, $order->getOrderWeight(),  $request->kurir);
         $dataongkir = $getOngkir['rajaongkir']['results'][0];
         $dataongkirbaru = collect($dataongkir['costs'])->filter(function ($item) use ($new_service) {

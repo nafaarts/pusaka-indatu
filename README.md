@@ -48,6 +48,17 @@ RAJAONGKIR_URL=https://api.rajaongkir.com/starter
 MIDTRANS_SERVER_KEY=
 MIDTRANS_CLIENT_KEY=
 ```
+sama konfigurasi SMTP email juga di isi
+```sh
+MAIL_MAILER=smtp
+MAIL_HOST=
+MAIL_PORT=465
+MAIL_USERNAME=
+MAIL_PASSWORD=
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=
+MAIL_FROM_NAME="${APP_NAME}"
+```
 sip, kalo udah kita clear cache dulu buat jaga jaga
 ```sh
 php artisan config:clear
