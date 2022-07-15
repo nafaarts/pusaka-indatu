@@ -39,6 +39,7 @@ class FoodController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'satuan' => 'required',
             'price' => 'required|numeric',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
@@ -52,6 +53,7 @@ class FoodController extends Controller
         Food::create([
             'name' => $request->name,
             'slug' => str()->slug($request->name),
+            'satuan' => $request->satuan,
             'price' => $request->price,
             'description' => $request->description,
             'image' => $image,
@@ -82,6 +84,7 @@ class FoodController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'satuan' => 'required',
             'price' => 'required|numeric',
             'description' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10048',
@@ -96,6 +99,7 @@ class FoodController extends Controller
         $food->update([
             'name' => $request->name,
             'slug' => str()->slug($request->name),
+            'satuan' => $request->satuan,
             'price' => $request->price,
             'description' => $request->description,
             'image' => $image ?? $food->image,

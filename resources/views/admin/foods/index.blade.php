@@ -39,6 +39,9 @@
                                     Nama Makanan
                                 </th>
                                 <th>
+                                    Satuan
+                                </th>
+                                <th>
                                     Harga
                                 </th>
                                 <th>
@@ -57,6 +60,9 @@
                                     </td>
                                     <td>
                                         <strong>{{ $food->name }}</strong>
+                                    </td>
+                                    <td>
+                                        {{ $food->satuan }}
                                     </td>
                                     <td>
                                         Rp. {{ number_format($food->price) }}

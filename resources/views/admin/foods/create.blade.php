@@ -27,6 +27,15 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="satuan">Satuan</label>
+                        <input type="text" class="form-control form-control-sm" id="satuan" name="satuan"
+                            placeholder="Masukkan Satuan makanan" value="{{ old('satuan') }}">
+                        @error('satuan')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
                         <label for="price">Harga</label>
                         <input type="number" class="form-control form-control-sm" id="price" name="price"
                             placeholder="Masukkan Harga makanan" value="{{ old('price') }}">
